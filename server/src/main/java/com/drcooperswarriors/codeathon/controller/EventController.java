@@ -1,0 +1,76 @@
+package com.drcooperswarriors.codeathon.controller;
+
+import com.drcooperswarriors.codeathon.model.Event;
+import com.drcooperswarriors.codeathon.model.EventParticipants;
+import com.drcooperswarriors.codeathon.model.User;
+import com.drcooperswarriors.codeathon.model.request.CreateEventRequest;
+import com.drcooperswarriors.codeathon.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@CrossOrigin
+@RequestMapping("/api")
+public class EventController {
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    private EventParticipantsRepository eventParticipantsRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/event")
+    public List<Event> getEvents() { return eventRepository.findAll(); }
+
+//    @PostMapping("/events")
+//    @CrossOrigin(origins = {"http://localhost:3000"})
+//    @ResponseBody
+//    Event newEvent(@RequestBody CreateEventRequest request) {
+//        request.setGroupRepository(groupRepository);
+//        request.setUserRepository(userRepository);
+////        Event newEvent = request.getEvent();
+////        return eventRepository.save(newEvent);
+//    }
+
+    @PostMapping("/register")
+    @CrossOrigin(origins = {"http://localhost:3000"})
+    @ResponseBody
+    public ResponseEntity<Object> registerForEvent(@RequestParam(required = true) int eventId){
+        // TODO extract userId from token in Authorization header
+        int userId = 1;
+        EventParticipants eventParticipants = new EventParticipants();
+        Optional<Event> event = eventRepository.findById(eventId);
+        eventParticipants.setEvent(event.get());
+        Optional<User> user = userRepository.findById(userId);
+        eventParticipants.setUser((user.get()));
+        eventParticipantsRepository.save(eventParticipants);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+//    @GetMapping("/getEventsByUser")
+//    public List<User> getEventsByUser(@RequestParam(required = true) Integer id){
+//        return eventRepository.getEventsByUsername(id);
+//
+//    }
+
+//    @GetMapping("/api/user")
+//    public ResponseEntity getAllExamples(@RequestParam(required = true) Integer id) {
+//        User user = userRepository.getUserById(id);
+//
+//        if(user != null) {
+//            return ResponseEntity.ok(user);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//    }
+}

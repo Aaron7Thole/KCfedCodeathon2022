@@ -1,0 +1,61 @@
+.create-gbtn{
+    height: 30% !important;
+}
+.event-description{
+    text-align: left;
+    font-size:.75rem;
+}
+.time-date{
+    font-size:.75rem;
+}
+.location{
+    font-size:.75rem;
+}
+.num-inter{
+    color: rgb(158, 157, 157);
+    font-size:.60rem;
+}
+.nav-link{
+    color: white;
+}
+.nav-link:hover{
+    color: black;
+}
+.input-fields{
+    position: relative;
+    left: -0px;
+    top: 23px;
+}
+.group-popup{
+    height: 10rem;
+}
+.group-label{
+    font-size:.75rem !important;
+    position: relative;
+    left: 5%;
+    top: 26px;
+    margin-bottom: 35px;
+}
+.group-name-input{
+    position: relative;
+    width: 55%;
+}
+.category-dropBox{
+    position: relative;
+    font-size:.75rem;
+    left: 22px;
+    top: 20px;
+}
+.label-description{
+    font-size:.75rem;
+    position: relative;
+    left: 65%;
+    top: -125px;
+}
+.description-text{
+    width: 40%;
+    height: 80px;
+    position: relative;
+    top: -30px;
+    left: 150px;
+}
